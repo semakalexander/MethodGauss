@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace MethodGauss
 {
     class GaussMethod
     {
         static Random random = new Random();
-
         public int RowCount { get; set; }
         public int ColCount { get; set; }
         public double[,] Matrix { get; set; }
@@ -28,7 +22,7 @@ namespace MethodGauss
         public GaussMethod(int row, int col)
         {
             RowCount = row;
-            ColCount = col;
+            ColCount = col;           
             Matrix = new double[RowCount, ColCount];
             RightPart = new double[RowCount];
             Solutions = new double[RowCount];
@@ -58,7 +52,7 @@ namespace MethodGauss
                     maxElement = Matrix[i, index];
                     maxElementIndex = i;
                 }
-            }
+            }       
 
             //міняєм місцями з початковим
             if (maxElementIndex > index)

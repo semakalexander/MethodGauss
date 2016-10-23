@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MathNet.Numerics.LinearAlgebra;
+using MathNet.Numerics.LinearAlgebra.Double;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,22 +13,24 @@ namespace MethodGauss
     {
         static void Main(string[] args)
         {
-            var mySolution = new GaussMethod(3, 3)
-            {
-                RightPart =
-                {
-                    [0] = 1,
-                    [1] = 2,
-                    [2] = 0
-                },
-                Matrix =
-                {
-                    [0, 0] = 4, [0, 1] = 2, [0, 2] = -1,
-                    [1, 0] = 5, [1, 1] = 3, [1, 2] = -2,
-                    [2, 0] = 3, [2, 1] = 2, [2, 2] = -3
-                }
-            };
+          
+            var mySolution = new MethodGauss(new double[,] { 
+                     { 4, 2, -1 },
+                     { 5, 3, -2 },
+                     { 3, 2, -3 }
+            }, new double[] { 1, 2, 0 });
+
+            Console.WriteLine(mySolution.Matrix);
+            mySolution.RightPart = Vector<double>.Build.DenseOfArray(new double[] { 1, 2, 0 });
+            
+
+            var transp = mySolution.Matrix.Transpose();
+            Console.WriteLine("Transponse: " + transp);
+            Console.WriteLine("Determinant = " + mySolution.Matrix.Determinant());
             mySolution.SolveMatrix();
+          
+         
+            Console.ReadLine();
         }
     }
 }
